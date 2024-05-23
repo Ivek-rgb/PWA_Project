@@ -14,10 +14,9 @@
         .modDiv{
             display: flex;
             flex-direction: column;
-            width: 21%;
+            width: 15%;
             margin-bottom: 50px;
         }
-
     </style>
 </head>
 <body>
@@ -61,7 +60,6 @@
             echo returnDeFangedModDiv($mod); 
         } 
     }
-
 ?>
 </body>
 </html>
