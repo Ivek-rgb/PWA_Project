@@ -90,6 +90,12 @@
         .unselectable{
             pointer-events: none;
             user-select: none;
+            cursor: none;
+        }
+
+        .no-pointer-events{
+            pointer-events: none;
+            user-select: none;
         }
 
         #dotContainer{
@@ -300,10 +306,10 @@
         <div class="imageContainer">
             <?= returnCustomHeader("Mod gallery", "h2", true);?>
             <div class="flickerViewport" id="flickerWindow">
-                <div class="imageCarousel" style="left: 0%;">
+                <div class="imageCarousel unselectable" style="left: 0%;" draggable="false">
                     <?php foreach($imageLinkArr as $imageLink): ?> 
-                        <div class="imageCell" style="left: <?php echo ($carouselCount * 101) ?>%;">
-                            <img class="additionalImages unselectable" src="<?php echo $imageLink ?>" alt="<?php $modName . "pic" ?>" unselectable="on" >    
+                        <div draggable="false" class="imageCell unselectable" style="left: <?php echo ($carouselCount * 101) ?>%;">
+                            <img draggable="false" class="additionalImages unselectable" src="<?php echo $imageLink ?>" alt="<?php $modName . "pic" ?>">    
                         </div>
                         <?php $carouselCount++;  ?> 
                     <?php endforeach; ?>
@@ -335,6 +341,11 @@
                 document.querySelector("#flickerWindow").style.height = imageHeight + "px";
                 //document.querySelector("#flickerWindow").style.width = imageWidth + "px";
                 //document.querySelector("#dotContainer").style.width = imageWidth + "px"; 
+            });
+
+            // this actually fixed it since             
+            document.querySelector("#flickerWindow").addEventListener("dragstart", function(event){
+                event.preventDefault(); 
             });
 
             var mouseCoordinateX, mouseCoordinateY; 
