@@ -372,8 +372,6 @@
 
                 if(!transitionEngaged  && (calibratedHeightForDots < touchedElement.offsetHeight - document.querySelector("#dotContainer").offsetHeight)){
                     
-                    console.log("Picture clamped!");
-
                     var listenInterval = setInterval(function(){
 
                         let boundingBox = touchedElement.getBoundingClientRect(); 
