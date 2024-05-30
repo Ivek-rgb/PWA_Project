@@ -1,4 +1,3 @@
-
 <script>
     function expandColapseParagraph(paragraphNumber){
         
@@ -14,6 +13,17 @@
         }
     }
 </script>
+
+<style>
+    .expandCollapse{
+        color: green;
+    }
+
+    .expandCollapse:hover{
+        color: #81C332;
+        transition: 0.7s;
+    }
+</style>
 
 <?php 
     // this here will keep track of all expendable trackers on site should there arise need to be more 
@@ -31,13 +41,13 @@
             return $matches[0]; 
         }, $textToReturn);
         ob_start();?>
-            <p>
+            <p class="descItself">
                 <span>
                     <?= $result ?>
                 </span>
             </p>
             <?php if($nwLineCounter >= $maxRows):?>
-            <p class="expandCollapse" style="color: green; text-decoration: underline; font-weight:bolder; cursor:pointer;"
+            <p class="expandCollapse" style="text-decoration: underline; font-weight:bolder; cursor:pointer;"
             onclick="expandColapseParagraph(<?=$expendablePCounter;?>)"
             >Read more</p>
             <?php endif;?>
@@ -45,7 +55,4 @@
         $return = ob_get_clean();
         return $return; 
     }
-
-
 ?>
-
