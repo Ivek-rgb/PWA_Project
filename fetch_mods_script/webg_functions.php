@@ -20,7 +20,7 @@
             <img class="modBannerImage" src="<?php echo $imageAttr ?>" alt="<?php echo $modName . "pic" ?>">
             <h3 class="modName"><?php echo $modName ?></h3>
             <p class="authors"><?php echo $modAuthors ?></p>
-            <form action="modDesc.php" method="GET">
+            <form action="mod_desc.php" method="GET">
                 <input style="display: none;" name="descLink" type="text" value="<?php echo "https://www.farming-simulator.com/" . $furtherScrapingLink; ?>">
                 <input type="text" name="mainPhoto" style="display: none;" value="<?=$imageAttr?>">
                 <input type="submit" value="MORE INFO">
