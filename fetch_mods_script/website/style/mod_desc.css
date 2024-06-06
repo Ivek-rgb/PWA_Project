@@ -1,0 +1,248 @@
+body{
+    
+    margin: 0;
+    
+}
+
+.imageCarousel img{
+    width: 100%;
+    height: auto;
+    position: absolute;
+}
+
+.flickerViewport{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: end;
+    width: 100%;
+    margin-top: 20px;
+    cursor: grab;
+}
+
+.imageContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.imageCarousel{
+    top: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
+    transition: all 0s ease;
+}
+
+.imageCell{
+    position: absolute;
+    width: 100%;
+}
+
+.unselectable{
+    pointer-events: none;
+    user-select: none;
+    cursor: none;
+}
+
+.no-pointer-events{
+    pointer-events: none;
+    user-select: none;
+}
+
+#dotContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgba(40, 40, 40, 0.57);
+    padding: 10px 0;
+    z-index: 20;
+    cursor:default;
+}
+
+.selected{
+    background-color: white;
+}
+
+.dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+hr{
+    background-color: #D0D0D0;
+    border-color: #D0D0D0;
+}
+
+.informationAndDownload{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* externalize this to default style font map for whole web app*/
+
+h1, h2, h3, h4{
+    color: #282828;
+}
+
+.descItself{
+    color: #888888;
+}
+
+.mainMidContainer{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainImageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainImageContainer img{
+    width: 250px;
+    border-radius: 10px;
+}
+
+.horizontal50Container{
+    display: flex;
+    width: 100%;
+}
+
+.detailPointsDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.innerDetailContainer{
+    width: 100%;
+}
+
+.innerDetailContainer p{
+    margin: 12px 0;
+    width: 100%;
+    color: #282828;
+}
+
+.horizontal50Container>div{
+    width: 50%;
+}
+
+.downloadLink{
+    max-width: 350px;
+}
+
+.downloadLink a{
+    text-decoration: none;
+    display: flex;
+    text-align: center;
+}
+
+.downloadLink a:hover #download{
+    background-color:greenyellow;
+    color: #282828;
+    transition: 1s;
+}
+
+.downloadLink h3{
+    padding: 12px 0;
+}
+
+#fileType{
+    width: 30%;
+    background-color: #282828;
+    color: white;
+}
+
+#download{
+    background-color: #81C332;
+    color: white;
+    width: 70%;
+}
+
+.adminActions{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.adminActions form button{
+    border: none; 
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.edit{
+    background-color: darkblue;
+}
+
+.delete{
+    background-color: darkred;
+}
+
+.edit:hover{
+    background-color: dodgerblue;
+}
+
+.delete:hover{
+    background-color: red;
+}
+
+.adminActions form button i{
+    color: white;
+    margin: 20px 30px;
+}
+
+
+@media only screen and (max-width: 1200px){
+    .mainMidContainer{
+        width: 80%;
+    }
+
+    .horizontal50Container{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .horizontal50Container{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .detailPointsDiv{
+        width: 100%;
+        text-align: center;
+    }
+
+    .description{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px){
+
+    .mainMidContainer{
+        width: 100%;
+    }
+
+    .downloadLink{
+        margin: 0 auto;
+        max-width: none;
+        margin: 0 5px;
+    }
+
+}

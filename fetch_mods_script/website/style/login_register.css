@@ -1,0 +1,77 @@
+body{
+    margin: 0;
+    height: 100vh;
+    background-color:  #111111;
+    justify-content: center;
+    
+}
+.mainContent{
+    width: 100%;
+    height: 80vh;
+    background-image: url("../img/wallpaper.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.registerEntry{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 500px;
+    padding: 10px 10px;
+    background-color: rgb(37, 37, 37, 0.9);
+    color: white;
+}
+
+.registerEntry img{
+    width: 200px;
+    text-align: center;
+    user-select: none;
+}
+
+.registerEntry > *{
+    margin: 5px 0;
+}
+
+.error{
+    color: red;
+}
+
+input{
+    border: none;
+    border-radius: 0;
+    padding: 7px 5px;
+}
+
+.registerEntry label{
+    user-select: none;
+}
+
+.registerEntry button{
+    border: none;
+    padding: 10px 0;
+    font-weight: bolder;
+    color: white;
+    
+    cursor: pointer;
+    
+}
+
+.registerEntry button[name="register"]{
+    background-color: #81C332;
+    margin-top: 5px;
+}
+
+.registerEntry button[name="login"]{
+    background-color: dodgerblue;
+}
+
+
+.registerEntry button[name="register"]:hover{
+    background-color: yellowgreen;
+}
+

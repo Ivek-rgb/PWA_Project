@@ -1,0 +1,318 @@
+.modCollectionContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-flow: wrap;
+    width: 65%;
+    margin: 10px 0;
+}
+
+.modDiv{
+    display: flex;
+    flex-direction: column;
+    width: 22%;
+    margin-bottom: 50px;
+    justify-content: space-between;
+}
+
+.modDiv:hover{
+    transform: scale(102%);
+    transition: 0.5s;
+}
+
+.paginationDiv{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.paginationButton{
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+    
+}
+
+.bolderSelected{
+    background-color: #E0E0E0;
+    font-weight: bolder;
+    cursor:default;
+}
+
+.unselectedPag{
+    cursor: pointer;
+}
+
+.unselectedPag:hover{
+    background-color: #202020;
+    color: #81C332;
+}
+
+
+.paginationForm{
+    width: 65%;
+    display: flex;
+    border: 1px solid #484848;
+}
+
+.middleCenter{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mainDataContainer{
+    width: 65%;
+}
+
+.modDiv{
+    background-color: #E6E4E3;
+}
+
+.optionBtn{
+    width: 100%;
+    font-weight: bolder;
+    border: none;
+    padding: 10px 0;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.moreInfoBtn{
+    background-color: #81C332;
+    color: white;
+}
+
+
+.moreInfoBtn:hover, .deleteBtn:hover, .editBtn:hover{
+    color: #202020;
+}
+
+.moreInfoBtn:hover{
+    background-color: greenyellow;
+}
+
+.buttonOptions{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.deleteBtn{
+    background-color: darkred;
+    color: white;
+}
+
+.editBtn:hover{
+    background-color: dodgerblue;
+}
+
+.editBtn{
+    background-color: darkblue;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.deleteBtn:hover{
+    background-color: red;
+}
+
+.innerPag{
+    border: none;
+    border-left: 1px solid #484848;
+}
+
+.outerPagL{
+    border: none;
+    border-right: 1px solid #484848;
+}
+
+.outerPagR{
+    border: none;
+    border-left: 1px solid #484848;
+}
+
+.lastInnerOne{
+    border-right: 1px solid #484848;
+}
+
+.featuredModBanner img{
+    width: 100%;
+    display: block;
+}
+
+.InfoAndSearch{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 5%;
+    right: 20px;
+}
+
+.infoDiv{
+    width: 300px;
+    background-color: #202020;
+}
+
+.infoDiv  h2, .infoDiv p{
+    color:#E0E0E0;
+}
+
+.infoDiv h2, .infoDiv p, .infoDiv h4{
+    margin-right: 10px;
+    text-align: right;
+
+}
+
+.additionalFilters{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #202020;
+    align-items: center;
+    position: relative;
+    color: #E0E0E0;
+}
+
+.additionalFilters a{
+    text-decoration: none;
+    color: #E0E0E0;
+}
+
+.additionalFilters p{
+    cursor: pointer;
+    margin: 0;
+    padding: 20px 0;
+    margin-left: 10px;
+}
+
+.categoryList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #202020;
+    color: #E0E0E0;
+    position: absolute;
+    overflow-y: scroll;
+    height: 500px;
+    display: none;
+    top:55px;
+    -webkit-box-shadow: 0px -4px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -4px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px -4px 5px 0px rgba(0,0,0,0.75);
+}
+
+.categoryList a{
+    width: 33%;
+    padding: 15px 0px;
+    border-bottom: 2px solid #202020;
+    text-align: center;
+}
+
+.categoryList a:hover{
+    border-bottom: 2px solid #81C332;
+}
+
+.additionalFilters p:hover ~ .categoryList{
+    display: flex;
+}
+
+.triangleUp{
+    transition: 0.2s;
+}
+
+.categoryListDiv{
+    width: 100%;
+    position: relative;
+    margin: 0;
+    margin-bottom: 50px;
+}
+
+.modSearch{
+    display: flex;
+    background-color: white;
+    align-items: center;
+}
+
+.additionalFilters p{
+    margin-right: 4px;
+}
+
+.modSearch input{
+    border-radius: 0px;
+    border: none;
+    width: 100%;
+    user-select: none;
+    padding: 10px 10px;
+}
+
+.modSearch input:focus{
+    outline: none;
+}
+
+.modSearch i{
+    color: #686868;
+    padding: 0px 5px;
+}
+
+.searchForm{
+    margin-top: 10px;
+    -webkit-box-shadow: 5px 5px 27px 5px rgba(0,0,0,0.47); 
+    box-shadow: 5px 5px 27px 5px rgba(0,0,0,0.47);
+}
+
+.categoryFilterDiv{
+    display: flex;
+    align-items: center;
+}
+
+.categoryFilterDiv:hover > .categoryList{
+    display: flex;
+}
+
+
+.categoryFilterDiv:hover > .triangleUp{
+    transform: rotate(180deg);
+    transition: 0.2s;
+}
+
+@media only screen and (max-width: 1200px){
+
+    
+    .modDiv{
+        width: 33%;
+    }
+
+}
+
+
+@media only screen and (max-width: 800px){
+
+    .modCollectionContainer{
+        width: 97%;
+    }
+
+    .mainDataContainer{
+        width: 97%;
+    }
+
+    .paginationDiv{
+        width: 97%;
+    }
+
+    .modDiv{
+        width: 33%;
+    }
+}
+
+@media only screen and (max-width: 500px){
+
+    .modDiv{
+        width: 100%;
+    }
+
+
+}

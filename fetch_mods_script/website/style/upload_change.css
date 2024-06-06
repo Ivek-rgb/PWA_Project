@@ -1,0 +1,145 @@
+.returnDiv{
+    height: 80vh;
+    width: 65%;
+}
+
+.mainContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.editBox{
+    width: 65%;
+}
+
+.changableThumbnailImage{
+    border-radius: 20px;
+    width: 250px;
+    height: 250px;
+}
+
+.thumbnailPart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.thumbnailPart > *{
+    margin: 5px 0;
+}
+
+.changeThumbnail > *{
+    width: 100%;
+    border: none;
+    text-align: center;
+}
+.changeThumbnail{
+    font-size: 15px;
+}
+
+.otherChanges{
+    display: flex;
+    flex-direction: column;
+}
+
+.otherChanges > *{
+    margin: 5px 0;
+}
+
+.galleryContainer{
+    border: 1px solid black; 
+}
+
+.galleryContainer{
+    padding: 5px 5px;
+    overflow: scroll;
+    height: 500px;
+}
+
+.imageComponentContainer{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.imageComponentContainer input[type="text"]{
+    width: 300px;
+    border: none;
+    padding: 10px 5px;
+}
+
+.imageComponentContainer img{
+    width: 200px;
+    height: 100px;
+}
+
+.deleteBtn{
+    color: white;
+    background-color: darkred;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.deleteBtn:hover{
+    background-color: red;
+}
+
+
+.enlargedBtn{
+    width: 100%;
+    padding: 20px 0;
+    color: white;
+    font-weight: bolder;
+    background-color: #81C332;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.enlargedBtn:hover{
+    background-color: greenyellow;
+    color: black;
+}
+
+@media only screen and (max-width: 1200px){
+    .imageComponentContainer{
+        flex-direction: column;
+    }
+
+    .imageComponentContainer{
+        margin: 20px 0;
+    }
+
+    .imageComponentContainer img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .imageComponentContainer > *{
+        margin: 5px 0;
+    }
+
+    .imageComponentContainer input[type="text"]{
+        width: 100%;
+    }
+
+    .imageComponentContainer button{
+        width: 50%;
+    }
+
+    .returnDiv{
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 800px){
+    .editBox{
+        width: 97%;
+    }
+}
+
