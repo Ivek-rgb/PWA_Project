@@ -9,9 +9,9 @@ class ComposerStaticInit03b47b7576525da6cbb4b64a32d9eaf0
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'simplehtmldom\\Debug' => __DIR__ . '/..' . '/simplehtmldom/simplehtmldom/Debug.php',
-        'simplehtmldom\\HtmlDocument' => __DIR__ . '/..' . '/simplehtmldom/simplehtmldom/HtmlDocument.php',
-        'simplehtmldom\\HtmlNode' => __DIR__ . '/..' . '/simplehtmldom/simplehtmldom/HtmlNode.php',
-        'simplehtmldom\\HtmlWeb' => __DIR__ . '/..' . '/simplehtmldom/simplehtmldom/HtmlWeb.php',
+        'simplehtmldom\\HtmlDocument' => __DIR__ . '/..' . '/simplehtmldom/HtmlDocument.php',
+        'simplehtmldom\\HtmlNode' => __DIR__ . '/..' . '/simplehtmldom/HtmlNode.php',
+        'simplehtmldom\\HtmlWeb' => __DIR__ . '/..' . '/simplehtmldom/HtmlWeb.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

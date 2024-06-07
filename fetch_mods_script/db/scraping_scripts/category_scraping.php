@@ -208,7 +208,7 @@
     }
 
     //scrapeAndWriteCategories(); 
-    scrapeCategoriesFromSite(); 
+    testOnMatoBipa(); 
 
 ?>
 
