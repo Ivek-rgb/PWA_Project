@@ -7,8 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'simplehtmldom\\Debug' => $vendorDir . '/simplehtmldom/simplehtmldom/Debug.php',
-    'simplehtmldom\\HtmlDocument' => $vendorDir . '/simplehtmldom/simplehtmldom/HtmlDocument.php',
-    'simplehtmldom\\HtmlNode' => $vendorDir . '/simplehtmldom/simplehtmldom/HtmlNode.php',
-    'simplehtmldom\\HtmlWeb' => $vendorDir . '/simplehtmldom/simplehtmldom/HtmlWeb.php',
+    'simplehtmldom\\Debug' => $vendorDir . '/simplehtmldom/Debug.php',
+    'simplehtmldom\\HtmlDocument' => $vendorDir . '/simplehtmldom/HtmlDocument.php',
+    'simplehtmldom\\HtmlNode' => $vendorDir . '/simplehtmldom/HtmlNode.php',
+    'simplehtmldom\\HtmlWeb' => $vendorDir . '/simplehtmldom/HtmlWeb.php',
 );
