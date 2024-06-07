@@ -1,7 +1,8 @@
 
 <?php
 
-    define("DIRECTORY_UPLOAD_PATH", "../../storage/"); 
+    define("DIRECTORY_UPLOAD_PATH", "../../storage/");
+    session_start(); 
     require_once "/xampp/htdocs/PWA_Project/fetch_mods_script/db/database_functions/db_functions.php"; 
 
     require_once "../components/header.php"; 
@@ -20,10 +21,8 @@
 
             if($isFinished)
                 echo "<p style=\"width:100%; text-align:center;\">Mod deleted!</p>";
-                
-
         }else{
-            header("Location: http://localhost/PWA_Project/fetch_mods_script/website/pages/fetch.php?pageNum=0"); 
+            header("Location: http://localhost/PWA_Project/fetch_mods_script/website/pages/mod_desc.php?modId=$_POST[modId]"); 
             exit(); 
         }
 
@@ -40,6 +39,7 @@
     <link rel="stylesheet" href="../style/footer.css">
     <link rel="stylesheet" href="../style/global.css">
     <script src="../../js/window_navigation_scripts.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>Mod deletion</title>
     <style>
         .returnDiv{

@@ -1,24 +1,27 @@
 <?php
+    session_start(); 
     require_once '../vendor/autoload.php'; 
     require_once '../components/mod_div.php'; 
     require_once '../components/customized_header.php'; 
     require_once '../../db/database_functions/db_functions.php'; 
     use simplehtmldom\HtmlDocument;
-    $httpClient = new \simplehtmldom\HtmlWeb();
-
+   
     $connection = openConnection(); 
-     
+
     $pageNumber = 0;
     if(isset($_GET["pageNum"]))
         $pageNumber = $_GET["pageNum"];
 
+    $game = "Farming simulator 22"; 
+    if(isset($_SESSION["game"]))
+        $game = $_SESSION["game"];
 
-    $totalNumberOfMods = getModCountFromServer();
+    $totalNumberOfMods = getModCountFromServer(NULL, $game);
     $numberOfItemsPerPage = 12; 
     $numberOfPages = ceil($totalNumberOfMods / $numberOfItemsPerPage);
     $numberOfDipsplayPages = 3; 
 
-    $randomFeaturedModInfo = getRandomFeaturedMod($connection); 
+    $randomFeaturedModInfo = getRandomFeaturedMod($connection, $game); 
     $selectedModImages = explode(" [:|:] ", $randomFeaturedModInfo["mod_imgs"]); 
     $selectedImage = $selectedModImages[rand(0, count($selectedModImages) - 1)]; 
 ?>
@@ -28,11 +31,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ModHub - FS22</title>
+    <title>ModHub - <?= $game ?></title>
     <link rel="stylesheet" href="../style/footer.css">
     <link rel="stylesheet" href="../style/header.css">
     <link rel="stylesheet" href="../style/global.css">
     <link rel="stylesheet" href="../style/fetch.css">
+    <link rel="stylesheet" href="../style/mod_div.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
         .featuredModsAndFilters{
@@ -76,7 +80,7 @@
                         ?>">
                         <?php endif; ?>
                         <div class="modSearch">
-                            <input type="text" name="search">
+                            <input type="text" name="search" placeholder="Search Mods">
                             <i class="fa fa-solid fa-search fa-sm fa-fw"></i>
                         </div>
                     </form>
@@ -107,7 +111,7 @@
             if(!preg_match("/\d+/", $pageNumber))
                 $pageNumber = 0; 
                 
-            $modItems = getBriefPartsFromModServer($pageNumber * $numberOfItemsPerPage, $numberOfItemsPerPage, $connection); 
+            $modItems = getBriefPartsFromModServer($pageNumber * $numberOfItemsPerPage, $numberOfItemsPerPage, $connection, $game, "mod_date_changed", FALSE); 
                             
             $limit = (($pageNumber + 1) * $numberOfItemsPerPage) <= $totalNumberOfMods ? ($pageNumber + 1) * $numberOfItemsPerPage : $totalNumberOfMods; 
                 
@@ -144,7 +148,7 @@
 
     <div class="paginationDiv">
         <form action="fetch.php" method="GET" class="paginationForm">
-            <button name="pageNum" value="<?= $pageNumber - 1?>" class="paginationButton unselectedPag nearButton outerPagL" <?php if($pageNumber == 0) echo "disabled=true"; ?>>⮜</button>
+            <button name="pageNum" value="<?= $pageNumber - 1?>" class="paginationButton unselectedPag nearButton outerPagL" <?php if($pageNumber <= 0) echo "disabled=true"; ?>>⮜</button>
             <div class="middleCenter">
                 
                 <?php if(isset($_GET["filter"])): ?>
@@ -169,7 +173,7 @@
                     <button name="pageNum" value="<?= $numberOfPages - 1?>" class="paginationButton unselectedPag nearButton innerPag"><?= $numberOfPages ?></button>    
                 <?php endif; ?>
             </div>
-            <button name="pageNum" value="<?= $pageNumber + 1?>" class="paginationButton unselectedPag nearButton outerPagR" <?php if($pageNumber == $numberOfPages - 1) echo "disabled=true"; ?>>⮞</button>
+            <button name="pageNum" value="<?= $pageNumber + 1?>" class="paginationButton unselectedPag nearButton outerPagR" <?php if($pageNumber >= $numberOfPages - 1) echo "disabled=true"; ?>>⮞</button>
         </form>
     </div>
 

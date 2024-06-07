@@ -45,7 +45,7 @@
         return appendLogicalQuery($inputQuery, $filterPart, "OR"); 
     }
 
-    function handleFilters($inputQuery, $limitStart = 0, $limitExtend = NULL, $liveConnection){
+    function handleFilters($inputQuery, $limitStart = 0, $limitExtend = NULL, $liveConnection, $game, $orderBy = "id", $asc = TRUE){
         $paramArr = [];
         $str = "";
         if(isset($_GET["filter"])){
@@ -64,8 +64,12 @@
             array_push($paramArr, '%' . htmlspecialchars($_GET["search"]) . '%');
             $str .= "s"; 
         }
+        $inputQuery = appendAndOpereator($inputQuery, "mod_game LIKE ?");
+        array_push($paramArr, $game);
+        $str .= "s"; 
+        $inputQuery .= " ORDER BY $orderBy" . ($asc ? "" : " DESC"); 
         if(isset($limitExtend))
-            $inputQuery .= " LIMIT $limitStart, $limitExtend";
+            $inputQuery .= " LIMIT $limitStart, $limitExtend;";
         $preparedStatement = $liveConnection->prepare($inputQuery);
         if(strlen($str) > 0) 
             $preparedStatement->bind_param($str, ...$paramArr); 
@@ -114,20 +118,21 @@
         return $getterFunction(fetchAssocArrStuff($query, $connection, FALSE, $preparedStatement)[$colAlias]);
     }
 
-    function getModCountFromServer($connection = NULL){
+    function getModCountFromServer($connection = NULL, $game = "Farming simulator 22", $orderBy = "mods_brief.id", $asc = FALSE){
         $outerOppened = isset($connection); 
         $connection = establishOnNull($connection); 
-        $queryWithFiltersIncluded = handleFilters("SELECT COUNT(mods_brief.id) AS numOfMods FROM mods_brief INNER JOIN mods_detailed ON mods_brief.id = mods_detailed.mod_id",0, NULL, $connection);
+        $queryWithFiltersIncluded = handleFilters("SELECT COUNT(mods_brief.id) AS numOfMods FROM mods_brief INNER JOIN mods_detailed ON mods_brief.id = mods_detailed.mod_id",0, 
+        NULL, $connection, $game, $orderBy, $asc);
         return fetchAgregatedColFromDB($queryWithFiltersIncluded, "numOfMods", function($result) { return intval($result);}  ,$connection, TRUE);
         if(!$outerOppened)
             mysqli_close($connection); 
     }
 
-    function getBriefPartsFromModServer($limitStart, $limitExtend, &$connection = NULL){
+    function getBriefPartsFromModServer($limitStart, $limitExtend, &$connection = NULL, $game = "Farming simulator 22", $orderBy = "mods_brief.id", $asc = FALSE){
         $outerOppened = isset($connection); 
         $connection = establishOnNull($connection); 
         $inputQuery = "SELECT mod_name, mod_author, mod_thumbnail, mods_brief.id, mod_manufacturer FROM mods_brief INNER JOIN mods_detailed ON mods_brief.id = mods_detailed.mod_id";
-        $inputQuery = handleFilters($inputQuery, $limitStart, $limitExtend, $connection);
+        $inputQuery = handleFilters($inputQuery, $limitStart, $limitExtend, $connection, $game, $orderBy, $asc);
         return fetchAssocArrStuff($inputQuery, $connection, TRUE, TRUE);
         if(!$outerOppened)
             mysqli_close($connection); 
@@ -141,13 +146,25 @@
         return fetchAgregatedColFromDB("SELECT MAX(id) AS latestId FROM $tableName", "latestId", function($result) { return intval($result);}, $connection);
     }
 
+    
+    function fetchIdRange($connection, $game){
+        $outerOppened = isset($connection); 
+        $connection = establishOnNull($connection); 
+        $result = mysqli_query($connection, "SELECT MAX(id) AS maxId, MIN(id) AS minId FROM mods_brief WHERE mod_game LIKE '$game'"); 
+        $arr = mysqli_fetch_assoc($result); 
+        mysqli_free_result($result); 
+        if(!$outerOppened)
+            mysqli_close($connection); 
+        return [$arr["minId"], $arr["maxId"]]; 
+    }
+
     function fetchAllCategories(&$connection = NULL){
         return fetchAssocArrStuff("SELECT * FROM mods_category", $connection, TRUE);
     }
 
-    function getRandomFeaturedMod($connection = NULL){
-        $maxId = fetchLatestId("mods_brief", $connection); 
-        return getSpecificMod(rand(1, $maxId), $connection);
+    function getRandomFeaturedMod($connection = NULL, $game = "Farming simulator 22"){
+        $range = fetchIdRange($connection, $game);  
+        return getSpecificMod(rand($range[0], $range[1]), $connection);
     }
 
     function updateMod($modId, $modName, $author, $modHash, $modThumbnail, $modGame, $modCategory, $modDesc, $modImg, $modVersion, $modLink, $modManufacturer, $connection = NULL){
@@ -206,5 +223,61 @@
     }
 
 
-    
+    function customPreparedQueryExecutor($query, $typeofdata, $connection, $arrOfargs) : mysqli_result | bool{
+        
+        $outerOppened = isset($connection);
+        $connection = establishOnNull($connection);
+
+        $statement = $connection->prepare($query); 
+        $statement->bind_param($typeofdata, ...$arrOfargs);
+
+        $statement->execute(); 
+
+        if(!$outerOppened)
+            mysqli_close($connection);
+
+        return $statement->get_result(); 
+        
+    }
+
+    function insertUserToDatabase($username, $password, $connection = NULL) : bool{
+        $outerOppened = isset($connection);
+        $connection = establishOnNull($connection);
+
+        $password = password_hash($password, CRYPT_BLOWFISH); 
+        $statement = $connection->prepare("INSERT INTO users (username, `password`, `role`) VALUES (?, ?, 0)");
+        $statement->bind_param("ss", $username, $password); 
+        
+        $userWritten = true; 
+
+        try{
+            $statement->execute(); 
+        }catch(mysqli_sql_exception $e){
+            if(preg_match("/Duplicate/i", $e))
+                $userWritten = false; 
+            else{
+                throw new mysqli_sql_exception($e->getMessage());
+                mysqli_close($connection); 
+            } 
+        }
+
+        if(!$outerOppened)
+            mysqli_close($connection);
+
+        return $userWritten; 
+    }
+
+    function fetchUserByUsername($username, $connection = NULL){
+        $outerOppened = isset($connection);
+        $connection = establishOnNull($connection);
+
+        $resultSet = customPreparedQueryExecutor("SELECT * FROM users WHERE username LIKE ?", "s", $connection, [$username]); 
+
+        if(!$outerOppened)
+            mysqli_close($connection);
+        
+        return mysqli_fetch_assoc($resultSet); 
+    }
+
+
 ?>

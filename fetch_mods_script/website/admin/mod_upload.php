@@ -1,7 +1,7 @@
 <?php 
 
     define("DIRECTORY_UPLOAD_PATH", "../../storage/"); 
-
+    session_start();
     require_once "/xampp/htdocs/PWA_Project/fetch_mods_script/db/database_functions/db_functions.php";
     require_once "../components/customized_upload_labels.php";
     require_once "../components/customized_header.php";
@@ -98,6 +98,7 @@
     <link rel="stylesheet" href="../style/upload_change.css">
     <script src="../../js/window_navigation_scripts.js"></script>
     <script src="../../js/carousel_add_script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>Mod update/change</title>
     <style>
         input[type="file"]{

@@ -1,10 +1,24 @@
-<?php
-
+<?php 
     require_once "./fetch_mods_script/db/database_functions/db_functions.php";
 
-    if(isset($_POST["register"])){
-        $userWritten = insertUserToDatabase($_POST["username"], $_POST["password"]); 
+    $error = 0; 
+
+    if(isset($_POST["login"])){
+
+        $resultSet = fetchUserByUsername($_POST["username"]);
+        
+        $error += intval($resultSet == null); 
+        if($error != 1 and !password_verify($_POST["password"], $resultSet["password"])) $error = 2; 
+
+        if($error == 0){
+            session_start(); 
+            $_SESSION["user_info"] = $resultSet;
+            header("Location: http://localhost/PWA_Project/fetch_mods_script/website/pages/index.php");
+            exit(); 
+        }   
+
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -17,41 +31,31 @@
     <link rel="stylesheet" href="./fetch_mods_script/website/style/global.css">
     <link rel="stylesheet" href="./fetch_mods_script/website/style/login_register.css">
     
-    <title>Register</title>
+    <title>Login</title>
 
     <style>
-        .gaming{
-            background-color: rosybrown;
-        }
 
-        .registerMessage{
+      .loginMessage{
             width: 100%;
             padding: 10px 0px;
             text-align: center;
             font-weight: bolder;
             display: none;
-            <?php 
-                if(isset($userWritten)){
-                    echo "display:block;";
-                    if($userWritten)
-                        echo "color:greenyellow;"; 
-                    else echo "color:red;"; 
-                }
-            ?>
+            color: red;
+            <?php if($error != 0) echo "display:block;";?>
         }
-       
+
     </style>
 </head>
 <body>
 
     <div class="mainContent">
 
-
         <div class="registerEntry">
 
-            <form action="index.php" method="POST" name="register">
+            <form action="login.php" method="POST" name="register">
                 <img src="./fetch_mods_script/website/img/FS_logo.png"> 
-                <h3>REGISTER ACCOUNT</h3>
+                <h3>LOGIN</h3>
                 <label for="username">Username:</label>
 
                 <input type="text" name="username" id="username">
@@ -60,32 +64,34 @@
 
                 <input type="password" name="password" id="password">
 
-                <label for="passworda">Repeat password:</label>
-
-                <input type="password" name="passworda" id="passworda">
-
-                <?php if(isset($userWritten)): ?>
-                    <p class="registerMessage"><?php 
-                            if($userWritten) echo "User successfully registered!";
-                            else echo "This username is taken!"; 
-                        ?></p>
+                <?php if($error != 0): ?>
+                    <p class="loginMessage">
+                        <?php 
+                            switch($error){
+                                case 1: 
+                                    echo "That username does not exist!"; 
+                                    break; 
+                                case 2: 
+                                    echo "Wrong password!";
+                                    break; 
+                                default: 
+                                    echo "What?"; 
+                            } 
+                        ?>
+                    </p>
                 <?php endif; ?>
-                <button type="submit" name="register" value="1">REGISTER</button>
-                
-            </form>
-            <form action="login.php" method="GET">
+
                 <button type="submit" name="login" value="1">LOGIN</button>
+            </form>
+            
+            <form action="index.php" method="GET">
+                <button type="submit" name="register" value="1">REGISTER</button>
             </form>
 
         </div>
 
-        
-
-
 
     </div>
-
-
 
     <script>
 
@@ -115,13 +121,6 @@
 
                     },
 
-                    passworda:{
-
-                        required: true,
-
-                        equalTo: '#password'
-
-                    }
 
                 },
 
@@ -133,7 +132,7 @@
 
                         minlength: "**Username must have min 6 and max 15 characters",
 
-                        maxlength: "**Username must have min 6 and max 15 characters",
+                        maxlength: "**Username must have min 6 and max 15 characters"
 
                     },
 
@@ -147,14 +146,7 @@
 
                     },
 
-                    passworda:{
-
-                        required: "**Password must not be empty",
-
-                        equalTo: "**Passwords have to be same",
-
-                    }
-
+    
                 },
 
                 submitHandler: function(form){

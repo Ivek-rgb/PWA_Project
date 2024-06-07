@@ -7,19 +7,6 @@
     margin: 10px 0;
 }
 
-.modDiv{
-    display: flex;
-    flex-direction: column;
-    width: 22%;
-    margin-bottom: 50px;
-    justify-content: space-between;
-}
-
-.modDiv:hover{
-    transform: scale(102%);
-    transition: 0.5s;
-}
-
 .paginationDiv{
     display: flex;
     justify-content: space-around;
@@ -49,7 +36,6 @@
     color: #81C332;
 }
 
-
 .paginationForm{
     width: 65%;
     display: flex;
@@ -64,59 +50,6 @@
 
 .mainDataContainer{
     width: 65%;
-}
-
-.modDiv{
-    background-color: #E6E4E3;
-}
-
-.optionBtn{
-    width: 100%;
-    font-weight: bolder;
-    border: none;
-    padding: 10px 0;
-    margin: 5px 0;
-    cursor: pointer;
-}
-
-.moreInfoBtn{
-    background-color: #81C332;
-    color: white;
-}
-
-
-.moreInfoBtn:hover, .deleteBtn:hover, .editBtn:hover{
-    color: #202020;
-}
-
-.moreInfoBtn:hover{
-    background-color: greenyellow;
-}
-
-.buttonOptions{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.deleteBtn{
-    background-color: darkred;
-    color: white;
-}
-
-.editBtn:hover{
-    background-color: dodgerblue;
-}
-
-.editBtn{
-    background-color: darkblue;
-    color: white;
-    margin-bottom: 0px;
-}
-
-.deleteBtn:hover{
-    background-color: red;
 }
 
 .innerPag{
@@ -279,15 +212,6 @@
     transition: 0.2s;
 }
 
-@media only screen and (max-width: 1200px){
-
-    
-    .modDiv{
-        width: 33%;
-    }
-
-}
-
 
 @media only screen and (max-width: 800px){
 
@@ -303,9 +227,6 @@
         width: 97%;
     }
 
-    .modDiv{
-        width: 33%;
-    }
 }
 
 @media only screen and (max-width: 500px){

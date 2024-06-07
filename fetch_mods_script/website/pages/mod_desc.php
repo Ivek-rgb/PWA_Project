@@ -1,9 +1,11 @@
 <?php 
 
+    session_start();
     use simplehtmldom\HtmlWeb;
     require_once '../vendor/autoload.php'; 
     require_once '../components/customized_header.php'; 
     require_once '../../db/database_functions/db_functions.php'; 
+
 
     define("FILTER_URL", "http://localhost/PWA_Project/fetch_mods_script/website/pages/fetch.php?pageNum=0&filter="); 
 
@@ -63,16 +65,18 @@
             <?= returnCustomHeader($modName, "h1") ?>
 
             <!-- TODO: if this with php once you integrate SESSION -->
-            <div class="adminActions">
-                <form action="http://localhost/PWA_Project/fetch_mods_script/website/admin/mod_delete.php" method="GET">
-                    <input type="hidden" name="modId" value="<?= $_GET["modId"] ?>">
-                    <button class="delete"> <i class="fas fa-trash fa-lg"></i></button>
-                </form>
-                <form action="http://localhost/PWA_Project/fetch_mods_script/website/admin/mod_upload_change.php" method="GET">
-                    <input type="hidden" name="modId" value="<?= $_GET["modId"] ?>">
-                    <button class="edit"><i class="fas fa-edit fa-lg"></i></button>
-                </form>
-            </div>
+            <?php if($_SESSION["is_admin"]): ?>
+                <div class="adminActions">
+                    <form action="http://localhost/PWA_Project/fetch_mods_script/website/admin/mod_delete.php" method="GET">
+                        <input type="hidden" name="modId" value="<?= $_GET["modId"] ?>">
+                        <button class="delete"> <i class="fas fa-trash fa-lg"></i></button>
+                    </form>
+                    <form action="http://localhost/PWA_Project/fetch_mods_script/website/admin/mod_upload_change.php" method="GET">
+                        <input type="hidden" name="modId" value="<?= $_GET["modId"] ?>">
+                        <button class="edit"><i class="fas fa-edit fa-lg"></i></button>
+                    </form>
+                </div>
+            <?php endif; ?>
             
             <div class="details">
                 <?= returnCustomHeader("Mod details", "h3", true);?>

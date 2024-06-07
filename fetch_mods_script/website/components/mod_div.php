@@ -23,15 +23,18 @@
                     <input class="optionBtn moreInfoBtn" type="submit" value="MORE INFO">
                 </form>
 
-                <form action="<?= URL_DELETE ?>" method="GET">
-                    <input name="modId" type="hidden" value="<?= $furtherModLink ?>">
-                    <input class="optionBtn deleteBtn" type="submit" value="DELETE">
-                </form> 
+                <?php if($_SESSION["is_admin"]): ?>
+                    <form action="<?= URL_DELETE ?>" method="GET">
+                        <input name="modId" type="hidden" value="<?= $furtherModLink ?>">
+                        <input class="optionBtn deleteBtn" type="submit" value="DELETE">
+                    </form> 
 
-                <form action="<?= URL_EDIT ?>" method="GET">
-                    <input name="modId" type="hidden" value="<?= $furtherModLink ?>">
-                    <input class="optionBtn editBtn" type="submit" value="EDIT">
-                </form> 
+                    <form action="<?= URL_EDIT ?>" method="GET">
+                        <input name="modId" type="hidden" value="<?= $furtherModLink ?>">
+                        <input class="optionBtn editBtn" type="submit" value="EDIT">
+                    </form> 
+                <?php endif; ?>
+
             </div>
         </div>
         <?php

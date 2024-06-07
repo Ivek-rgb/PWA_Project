@@ -14,16 +14,21 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .registerEntry{
+    background-color: rgb(37, 37, 37, 0.9);
+    padding: 10px 10px;
     display: flex;
     flex-direction: column;
     max-width: 500px;
     width: 500px;
-    padding: 10px 10px;
-    background-color: rgb(37, 37, 37, 0.9);
+}
+
+.registerEntry form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     color: white;
 }
 
@@ -33,7 +38,7 @@ body{
     user-select: none;
 }
 
-.registerEntry > *{
+.registerEntry form > *{
     margin: 5px 0;
 }
 
