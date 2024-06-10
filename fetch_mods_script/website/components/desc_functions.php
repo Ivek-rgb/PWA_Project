@@ -26,7 +26,6 @@
 </style>
 
 <?php 
-    // this here will keep track of all expendable trackers on site should there arise need to be more 
     $expendablePCounter = 0; 
     function returnShearedParagraph($textToReturn, $maxRows = 10){
         global $expendablePCounter;

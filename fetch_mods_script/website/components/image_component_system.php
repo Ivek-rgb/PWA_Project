@@ -1,7 +1,5 @@
 <?php
 
-    // TODO: sanitization of the search function in 'fetch.php'
-
     define("DEFAULT_MISSING_IMAGE", "../img/missing-image.png");
     $id_image_container = 0; 
 

@@ -66,7 +66,6 @@
         <div class="informationAndDownload">
             <?= returnCustomHeader($modName, "h1") ?>
 
-            <!-- TODO: if this with php once you integrate SESSION -->
             <?php if($_SESSION["is_admin"]): ?>
                 <div class="adminActions">
                     <form action="http://localhost/PWA_Project/fetch_mods_script/website/admin/mod_delete.php" method="GET">
@@ -96,7 +95,6 @@
                 </div>
                 <?= returnCustomHeader("Download info", "h3", true);?>
                 
-                <!-- implement download links here --> 
                 <div class="downloadLink">
                     <a href="<?= $modDownloadLink ?>">
                         <h3 id="fileType"><?=  strtoupper(preg_split("/\.(?!.*\..*$)/", $modDownloadLink)[1]); ?></h3>
@@ -135,7 +133,6 @@
         </div>
     </div>
     <?php require_once "../components/footer.php"; ?>
-    <!-- Scripts can be hidden in other maps that the user cannot access on server -->
    <script src="../../js/carousel_script.js"></script>
 </body>
 </html>
