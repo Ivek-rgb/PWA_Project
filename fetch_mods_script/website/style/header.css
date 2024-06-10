@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #111110;
+    background-color: #181818;
     padding: 7px 15px;
 
 }
@@ -55,6 +55,7 @@
     font-size: 15px;
     border: none;
     color: white;
+    padding: 15px 0;
     cursor: pointer;
 }
 
@@ -66,6 +67,7 @@
 
 .logoPart button{
     background-color: transparent;
+    
     border: none;
 }
 

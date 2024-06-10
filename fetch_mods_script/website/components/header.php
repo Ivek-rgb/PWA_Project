@@ -1,5 +1,4 @@
 <?php 
-
     if(isset($_POST["signOut"])){
         session_destroy(); 
         header("Location: http://localhost/PWA_Project/login.php"); 
@@ -22,6 +21,7 @@
         exit();
     }
 ?>
+
 <div class="headerDiv">
     <div class="logoPart">
         <img src="../img/FS_logo.png" alt="main_logo">
@@ -30,14 +30,15 @@
         </form>
     </div>
     <div class="navContainer">
+        <?php if(isset($_SESSION["user_info"])): ?>
         <a href="../pages/index.php"><i class="fas fa-home"></i><p>HOME</p></a>
+        <?php endif; ?>
         <form action="#" method="POST">
             <button name="game" value="Farming simulator 22">MODS - FS22</button>
             <button name="game" value="Farming simulator 19">MODS - FS19</button>
             <button name="game" value="Farming simulator 17">MODS - FS17</button>
             <?php if($_SESSION["is_admin"]): ?>
                 <button name="upload" value="1">UPLOAD</button>
-                <button name="admin" value="1">ADMIN</button>
             <?php endif; ?>
         </form>
         

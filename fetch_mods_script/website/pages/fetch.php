@@ -6,6 +6,9 @@
     require_once '../../db/database_functions/db_functions.php'; 
     use simplehtmldom\HtmlDocument;
    
+    if(!isset($_SESSION["user_info"]))
+        $_SESSION["is_admin"] = false; 
+
     $connection = openConnection(); 
 
     $pageNumber = 0;

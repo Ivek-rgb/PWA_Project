@@ -5,8 +5,6 @@
     use simplehtmldom\HtmlDocument;
     use simplehtmldom\HtmlWeb;
 
-    // also need a further update to this so it can search newer mods and replace older ones 
-
     function testOnMatoBipa(){
 
         $httpClient = new \simplehtmldom\HtmlWeb(); 
@@ -81,7 +79,7 @@
                 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
                 $barebonesConnection = openConnection();
-                // failsafe break (touch on your own risk)
+                // failsafe break (does not seem to work)
                 $result = mysqli_query($barebonesConnection, "SELECT mods_brief.*, mod_version AS numberOf FROM mods_brief INNER JOIN mods_detailed ON mods_brief.id = mods_detailed.mod_id WHERE mod_hash LIKE '$modMD5Hash'");
                 $mod = mysqli_fetch_assoc($result);
                 mysqli_free_result($result); 
@@ -130,6 +128,7 @@
                         $pdo->rollBack(); 
                     }
                 }
+                
                 mysqli_close($barebonesConnection);
 
                 try{
@@ -207,7 +206,6 @@
         mysqli_close($connection); 
     }
 
-    //scrapeAndWriteCategories(); 
     testOnMatoBipa(); 
 
 ?>

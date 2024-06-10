@@ -29,9 +29,10 @@
 
         $arrToPushToDatabase = array_filter($_POST["image_url"], function($arg) { return strlen($arg) > 0;}); 
         $tmpNames = $_FILES["image_url"]["tmp_name"];
+        $imgNames = $_FILES["image_url"]["name"];
 
-        foreach($tmpNames as $tmpImageURL){
-            checkForFormats("png jpeg jpg webp pdf bmp tiff", $tmpImageURL, TRUE); 
+        foreach($imgNames as $imgURL){
+            checkForFormats("png jpeg jpg webp pdf bmp tiff", $imgURL, TRUE); 
         }
 
         for($i = 0; $i < count($tmpNames); $i++){
@@ -55,10 +56,10 @@
         
 
         $thumbnailImage = $_FILES["mod_thumbnail"]["size"]; 
-        checkForFormats("png jpeg jpg webp pdf bmp tiff", $_FILES["mod_thumbnail"]["tmp_name"], TRUE); 
+        checkForFormats("png jpeg jpg webp pdf bmp tiff", $_FILES["mod_thumbnail"]["name"], TRUE); 
 
         $modFile = $_FILES["mod_link"]["size"]; 
-        checkForFormats("php", $_FILES["mod_link"]["tmp_name"], FALSE);
+        checkForFormats("php", $_FILES["mod_link"]["name"], FALSE);
 
         if($thumbnailImage > 0){
             $newFilePath =  $modStorageName . $_FILES["mod_thumbnail"]["name"]; 

@@ -14,7 +14,11 @@
     }
 
     function checkForFormats($strOfFormats, $fileName, $allowTheese = TRUE){
-        if((str_contains($strOfFormats, strtolower(preg_split("/\.(?!.*\..*$)/", $fileName)[1]))) xor $allowTheese){
+        $splitArr = preg_split("/\.(?!.*\..*$)/", $fileName);
+        if(count($splitArr) < 2)
+            return false; 
+        echo var_dump($splitArr);
+        if((str_contains($strOfFormats, strtolower($splitArr[1]))) xor $allowTheese){
             die("You are uploading a potentional risk to the site. CEASE ACTIVITY NOW!");
         }
     }

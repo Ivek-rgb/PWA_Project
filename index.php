@@ -39,6 +39,7 @@
                 }
             ?>
         }
+
        
     </style>
 </head>
@@ -71,21 +72,16 @@
                         ?></p>
                 <?php endif; ?>
                 <button type="submit" name="register" value="1">REGISTER</button>
-                
             </form>
-            <form action="login.php" method="GET">
-                <button type="submit" name="login" value="1">LOGIN</button>
+            <form action="login.php">
+                <button type="submit" class="login">LOGIN</button>
             </form>
+
+            <a id="guestLogin" href="http://localhost/PWA_Project/fetch_mods_script/website/pages/fetch.php?page=0">View as guest</a>
 
         </div>
 
-        
-
-
-
     </div>
-
-
 
     <script>
 

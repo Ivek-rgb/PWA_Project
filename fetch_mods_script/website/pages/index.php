@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="../style/mod_div.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>Home</title>
-    <style>
 
+    <style>
         .mainContainer{
             width: 65%;
         }
@@ -65,10 +65,30 @@
 
         .modCollectionContainer{
             width: 100%;
-            display: flex;
+            display: flex;  
             justify-content: space-between;
+            flex-wrap: wrap;
         }
 
+        @media only screen and (max-width: 800px){
+
+            .mainContainer{
+                width: 100%;
+            }
+
+            .modCollectionContainer{
+                width: 97%;
+            }
+
+        }
+
+        @media only screen and (max-width: 1200px){
+    
+            .modDiv{
+                width: 45%;
+            }
+
+        }
     </style>
 </head>
 <body>

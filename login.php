@@ -45,6 +45,8 @@
             <?php if($error != 0) echo "display:block;";?>
         }
 
+
+
     </style>
 </head>
 <body>
@@ -68,14 +70,8 @@
                     <p class="loginMessage">
                         <?php 
                             switch($error){
-                                case 1: 
-                                    echo "That username does not exist!"; 
-                                    break; 
-                                case 2: 
-                                    echo "Wrong password!";
-                                    break; 
                                 default: 
-                                    echo "What?"; 
+                                    echo "User Name or Password does not match!"; 
                             } 
                         ?>
                     </p>
@@ -84,10 +80,10 @@
                 <button type="submit" name="login" value="1">LOGIN</button>
             </form>
             
-            <form action="index.php" method="GET">
-                <button type="submit" name="register" value="1">REGISTER</button>
+            <form action="index.php">
+                <button type="submit" class="register">REGISTER</button>
             </form>
-
+            <a id="guestLogin" href="http://localhost/PWA_Project/fetch_mods_script/website/pages/fetch.php?page=0">View as guest</a>
         </div>
 
 
