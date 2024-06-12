@@ -26,10 +26,11 @@
             $isFinished = deleteOnId($_POST["modId"],"mods_brief");
 
             $pathToUnlink = DIRECTORY_UPLOAD_PATH . $_POST["modId"]; 
-        
-            array_map("unlink", glob("$pathToUnlink/*")); 
 
-            rmdir($pathToUnlink); 
+            if(is_dir($pathToUnlink)){
+                array_map("unlink", glob("$pathToUnlink/*")); 
+                rmdir($pathToUnlink);
+            }
 
             if($isFinished)
                 echo "<p style=\"width:100%; text-align:center;\">Mod deleted!</p>";
