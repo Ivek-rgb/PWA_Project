@@ -2,6 +2,13 @@
 
     define("DIRECTORY_UPLOAD_PATH", "../../storage/"); 
     session_start();
+
+    if(!isset($_SESSION["is_admin"]) or !$_SESSION["is_admin"]){
+        header("Location: http://localhost/PWA_Project/login.php");
+        session_destroy(); 
+        exit(); 
+    }
+
     require_once "/xampp/htdocs/PWA_Project/fetch_mods_script/db/database_functions/db_functions.php";
     require_once "../components/customized_upload_labels.php";
     require_once "../components/customized_header.php";

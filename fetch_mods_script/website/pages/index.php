@@ -1,5 +1,12 @@
 <?php 
     session_start(); 
+    
+    if(!isset($_SESSION["user_info"])){
+        header("Location: http://localhost/PWA_Project/login.php");
+        session_destroy(); 
+        exit();  
+    }
+
     require_once '../components/customized_header.php';
     require_once '../components/mod_div.php';
     require_once '../../db/database_functions/db_functions.php';
@@ -7,8 +14,9 @@
     $accName = $_SESSION["user_info"]["username"]; 
     $_SESSION["is_admin"] = $isAdmin; 
     $helloMessage = "Welcome " . ($isAdmin ? "admin" : "user") . ", $accName";  
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

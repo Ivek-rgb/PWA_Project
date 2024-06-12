@@ -6,41 +6,43 @@
     require_once '../components/customized_header.php'; 
     require_once '../../db/database_functions/db_functions.php'; 
 
+    define("FILTER_URL", "http://localhost/PWA_Project/fetch_mods_script/website/pages/fetch.php?pageNum=0&filter=");
+    
+    if(!isset($_GET["modId"])){
+        header("Location: http://localhost/PWA_Project/fetch_mods_script/website/pages/fetch.php");
+        exit(); 
+    }
 
-    define("FILTER_URL", "http://localhost/PWA_Project/fetch_mods_script/website/pages/fetch.php?pageNum=0&filter="); 
 
-    if(isset($_GET["modId"])){
+    $modResult = getSpecificMod($_GET["modId"]);
+
+    $modName = $modResult["mod_name"];     
+    $description = $modResult["mod_desc"];
+    $imageLinkArr = explode(" [:|:] ", $modResult["mod_imgs"]); 
+    $thumbnailImage = $modResult["mod_thumbnail"]; 
+    $modDownloadLink = $modResult["mod_link"]; 
+    $carouselCount = 0; 
+
+    $modAuthors = preg_split("/\, |\,|\/ |\//", $modResult["mod_author"]); 
+    $authorFilters = ""; 
+
+    for($i = 0; $i < count($modAuthors); $i++){
+        $authorName = $modAuthors[$i]; 
+        $authorFilters .= ('<a href="' . FILTER_URL . "mod_author:$authorName\">$authorName</a>");
+        if($i != count($modAuthors) - 1)
+            $authorFilters .= ", "; 
+    }
         
-        $modResult = getSpecificMod($_GET["modId"]);
+    $_SESSION["game"] = $modResult["mod_game"]; 
 
-        $modName = $modResult["mod_name"];     
-        $description = $modResult["mod_desc"];
-        $imageLinkArr = explode(" [:|:] ", $modResult["mod_imgs"]); 
-        $thumbnailImage = $modResult["mod_thumbnail"]; 
-        $modDownloadLink = $modResult["mod_link"]; 
-        $carouselCount = 0; 
+    $modDetails = []; 
+    array_push($modDetails, '<b>' .  'Game'  .'</b>   ' . $modResult["mod_game"]);
+    array_push($modDetails, '<b>Manufacturer</b> <a href="' . FILTER_URL . "mod_manufacturer:$modResult[mod_manufacturer]\">$modResult[mod_manufacturer]</a>");
+    array_push($modDetails, '<b>Category</b> <a href="' . FILTER_URL . "mod_category:$modResult[mod_category]\">$modResult[category_name]</a>");
+    array_push($modDetails, '<b>Author(s)</b> ' . $authorFilters);
+    array_push($modDetails, '<b>' .  'Version'  .'</b>   ' . $modResult["mod_version"]);
+    array_push($modDetails, '<b>' .  'Last updated'  .'</b>   ' . $modResult["mod_date_changed"]);
 
-        $modAuthors = preg_split("/\, |\,|\/ |\//", $modResult["mod_author"]); 
-        $authorFilters = ""; 
-
-        for($i = 0; $i < count($modAuthors); $i++){
-            $authorName = $modAuthors[$i]; 
-            $authorFilters .= ('<a href="' . FILTER_URL . "mod_author:$authorName\">$authorName</a>");
-            if($i != count($modAuthors) - 1)
-                $authorFilters .= ", "; 
-        }
-        
-        $_SESSION["game"] = $modResult["mod_game"]; 
-
-        $modDetails = []; 
-        array_push($modDetails, '<b>' .  'Game'  .'</b>   ' . $modResult["mod_game"]);
-        array_push($modDetails, '<b>Manufacturer</b> <a href="' . FILTER_URL . "mod_manufacturer:$modResult[mod_manufacturer]\">$modResult[mod_manufacturer]</a>");
-        array_push($modDetails, '<b>Category</b> <a href="' . FILTER_URL . "mod_category:$modResult[mod_category]\">$modResult[category_name]</a>");
-        array_push($modDetails, '<b>Author(s)</b> ' . $authorFilters);
-        array_push($modDetails, '<b>' .  'Version'  .'</b>   ' . $modResult["mod_version"]);
-        array_push($modDetails, '<b>' .  'Last updated'  .'</b>   ' . $modResult["mod_date_changed"]);
-
-    }else die("Your site could not be reached!"); 
     
 ?>
 

@@ -1,4 +1,12 @@
 <?php 
+    
+    session_start(); 
+
+    if(!isset($_SESSION["is_admin"]) or !$_SESSION["is_admin"]){
+        header("Location: http://localhost/PWA_Project/login.php");
+        session_destroy(); 
+        exit(); 
+    }
 
     require_once "../../website/vendor/autoload.php"; 
     require_once "../database_functions/db_functions.php"; 
