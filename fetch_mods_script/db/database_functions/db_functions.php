@@ -2,7 +2,7 @@
 
     class CouldNotProcessQueryException extends Exception{
 
-        public function __construct($message = "Query could not be processed", $code = -84){
+        public function __construct($message = "Query could not be processed!", $code = -84){
             parent::__construct($message, $code);
         }
 
@@ -10,14 +10,14 @@
 
     class CouldNotEstablishConnectionException extends Exception{
 
-        public function __construct($message = "Could not establish connection to server", $code = 500){
+        public function __construct($message = "Could not establish connection to server!", $code = 500){
             parent::__construct($message, $code);
         }
 
     }
 
     function openConnection(){
-        $connection = mysqli_connect("localhost:8111", "root", "", "pwa_project") or die("Could not establish connection to database"); 
+        $connection = mysqli_connect("localhost:8111", "root", "", "pwa_project"); 
         if($connection === FALSE){
             throw new CouldNotEstablishConnectionException();
         } 

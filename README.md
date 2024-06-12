@@ -7,7 +7,7 @@ Ukoliko koristite defaultni port ili neki drugi port za pokretanje MariaDB, mora
 Prikaz funkcije **openConnection**: 
 ```
     function openConnection(){
-        $connection = mysqli_connect("localhost:[tvoj port]", "root", "", "pwa_project") or die("Could not establish connection to database"); 
+        $connection = mysqli_connect("localhost:[tvoj port]", "root", "", "pwa_project"); 
         if($connection === FALSE){
             throw new CouldNotEstablishConnectionException();
         } 
