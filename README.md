@@ -19,6 +19,8 @@ Prikaz funkcije **openConnection**:
 
 [Export baze podataka](./pwa_project_db.sql) - export baze u SQL query obliku, importa se preko "Import" tab-a na /localhost/phpmyadmin -u.
 
+**NIJE POTREBNO STVARATI VLASTITU BAZU PODATAKA ZA IMPORT. IMPORT SCRIPT JE POTREBNO IZVRŠITI NA RAZINI UMETANJA BAZI PODATAKA.**
+
 ## Login za Admin korisnički račun
 
 Ukoliko želite isprobati admin mogućnosti.
