@@ -24,7 +24,7 @@ Prikaz funkcije **openConnection**:
 Ukoliko želite isprobati admin mogućnosti.
 
 **Korisničko ime** - adminacc <br>
-**Lozinka** - adminpass <br>
+**Lozinka** - adminpassword <br>
 
 ## Login za normalni korisnički račun
 
